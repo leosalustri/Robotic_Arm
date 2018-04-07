@@ -24,26 +24,25 @@ cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
 term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
 
 while(1):
-       ret ,frame = cap.read()
-       if ret == True:
-           hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-           dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
+    ret ,frame = cap.read()
+    if ret == True:
+       hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+       dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
 
-           # apply meanshift to get the new location
-           ret, track_window = cv2.meanShift(dst, track_window, term_crit)
+       # apply meanshift to get the new location
+       ret, track_window = cv2.meanShift(dst, track_window, term_crit)
 
-           # Draw it on image
-           x,y,w,h = track_window
-           img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0),2)
-           img2 = cv2.circle(frame, (x+w/2, y+h/2), 10, (0, 0, 255), -1)
+       # Draw it on image
+       x,y,w,h = track_window
+       img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0),2)
+       img2 = cv2.circle(frame, (x+w/2, y+h/2), 10, (0, 0, 255), -1)
 
-           cv2.imshow('img2',img2)
-           k = cv2.waitKey(60) & 0xff#delay function
+       cv2.imshow('img2',img2)
+       k = cv2.waitKey(30) & 0xff#delay function
 
-           if k == 27:
-               break
-       else:
-          break
+       data = [x+w/2 , y+h/2]
+    if k == 27:
+       break
 
 cv2.destroyAllWindows()
 cap.release()
