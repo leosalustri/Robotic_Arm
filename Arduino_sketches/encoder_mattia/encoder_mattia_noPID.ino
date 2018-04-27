@@ -16,18 +16,10 @@ unsigned long oldtime = 0;
 
 //Altre costanti
 #define alfa 0.6 //valore di alfa appartenente a [0,1]
-#define Kp 0.2
-#define Kd 10
-
-//Pin pwm e direzione al ponteh motore A
-#define pwm 10
-#define left 12
-#define right 13
+#define Kp = 1000;
+#define Kd = 1000;
 
 void setup(){
-  pinMode(pwm,OUTPUT);
-  pinMode(left,OUTPUT);
-  pinMode(right, OUTPUT);
   pinMode(encoderA, INPUT); 
   digitalWrite(encoderA, HIGH); 
   pinMode(d_encoderA, INPUT); 
@@ -53,27 +45,8 @@ void loop()
     Serial.print(EncoderCounterA,DEC);
     Serial.print(",  ");
     Serial.println(EncoderCounterB,DEC);
-    int oldEncoderCounterA = EncoderCounterA;
-    int posd = 2100;//Supponiamo venga passato che il motore a si deve muovere di un giro.
-    int old = micros();
-    //ed = ()/(micros()- old)*Kd; 
-    int ed = ((EncoderCounterA - oldEncoderCounterA)/(micros()- old))*Kd;
-    int ep = (posd - EncoderCounterA)*Kp;
-    int errore = ed + ep;
-    if(errore >0 )
-    { //Una direzione
-      errore = constrain(errore, 0, 255);
-      digitalWrite(left,HIGH);
-      digitalWrite(right, LOW);
-    }
-    else 
-      {//Altrimenti gira nell'altro senso
-        errore = constrain(errore*-1,0, 255);
-        digitalWrite(left,LOW);
-        digitalWrite(right,HIGH);
-      }
-    int u = u*errore;
-    analogWrite(pwm, u);
+        
+
     
   }  
     
