@@ -7,36 +7,39 @@ cap = cv2.VideoCapture(0)
 while(cap):
     _,frame = cap.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-
-
     lower_blue = np.array([140,50,0])
     upper_blue = np.array([170,255,255])
 
-    lower_apple = np.array([22,80,100])
-    upper_apple = np.array([42,190,200])
+    lower_apple = np.array([168,180,80])
+    upper_apple = np.array([188,255,200])
 
     lower_postit = np.array([25,100,180])
     upper_postit = np.array([45,255,255])
 
-    grey = cv2.inRange(hsv, lower_postit, upper_postit)
+    grey = cv2.inRange(hsv, lower_apple, upper_apple)
     #immagine in scala di grigi filtrata in un intervallo di tonalita
     #cv2.imshow('rgb',frame) #DEBUG
     #cv2.imshow('hsv',hsv)
     cv2.imshow('grey', grey)
 
     #Applico una contours detection.
-    img2, contours, hierarchy = cv2.findContours(grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(frame, contours, -1, (0, 255, 0), 9)
-    cv2.imshow('img2',frame)
+    #img2, contours, hierarchy = cv2.findContours(grey, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    #cv2.drawContours(frame, contours, -1, (0, 255, 0), 9)
+    cv2.imshow('frame',frame)
 
     #Applico hough circle transform per trovare i cerchi nel frame
-    circles = cv2.HoughCircles(grey, cv2.HOUGH_GRADIENT, 1, 20,
+    circles = cv2.HoughCircles(grey, cv2.HOUGH_GRADIENT, 1, 50 ,param1 = 50, param2 = 30, minRadius = 20, maxRadius = 200)
 
-    param1 = 50, param2 = 30, minRadius = 0, maxRadius = 0)
+    #Disegno i cerchi e i centri
+    if circles is None:
+       cv2.imshow('frame', frame)
+       continue
 
-
-    #Esc chiude le schermate
+    circles = np.uint16(np.around(circles))
+    for i in circles[0, :]:
+        cv2.circle(frame, (i[0], i[1]), i[2], (0, 0, 255), 1)  # draw the outer circle
+        cv2.circle(frame, (i[0], i[1]), 2, (0, 0, 255), 3)  # draw the center of the circle
+    #Esc chiude le schermate0
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
