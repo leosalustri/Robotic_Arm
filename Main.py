@@ -35,7 +35,7 @@ while cap and save:
     greyBlue = cv2.inRange(hsv, lower_blue, upper_blue)
     #greyGreen = cv2.inRange(hsv, lower_green, upper_green)
 
-    #Applico hough circle transform
+    #Applico hough circle transform settare i parametri in base alle conversioni cm in pixel del sistema di riferimento.
     circlesRed = 0#cv2.HoughCircles(greyRed, cv2.HOUGH_GRADIENT, 1, 50, param1=50, param2=30, minRadius=20, maxRadius=200)
     circlesGreen = 0#cv2.HoughCircles(greyGreen, cv2.HOUGH_GRADIENT, 1, 50 ,param1 = 50, param2 = 30, minRadius = 20, maxRadius = 200)
     circlesBlue = cv2.HoughCircles(greyBlue, cv2.HOUGH_GRADIENT, 1, 50, param1=50, param2=30, minRadius=20, maxRadius=200)
