@@ -4,16 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/Obj_recognition.py" line="28" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5a8dbb0-760f-4461-92ea-813c56cbdb50" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame/0frame.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame/1frame.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame/2frame.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame/3frame.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frame/4frame.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed/0processed.png" beforeDir="false" />
-    </list>
+    <list default="true" id="d5a8dbb0-760f-4461-92ea-813c56cbdb50" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,16 +14,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="102">
               <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="0frame.png" pinned="false" current-in-tab="true">
+      <file leaf-file-name="0frame.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frame/0frame.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -405,19 +396,25 @@
       <option name="project" value="LOCAL" />
       <updated>1524906460374</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updates">
+      <created>1524909962418</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1524909962418</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19765739" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19765739" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5014641" side_tool="true" weight="0.32913387" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49853587" weight="0.16535433" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.21889764" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21889764" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -594,15 +591,15 @@
     <entry file="file://$PROJECT_DIR$/processed/0processed.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/frame/0frame.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="102">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frame/0frame.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
   <component name="masterDetails">

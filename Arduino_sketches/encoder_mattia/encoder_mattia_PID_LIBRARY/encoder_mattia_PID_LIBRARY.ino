@@ -5,7 +5,7 @@
 double Setpoint;
 double Input;
 double Output;
-double Kp = 0 , Ki = 10 , Kd=0;
+double Kp = 8 , Ki =100 , Kd=0.01;
 PID mypid(&Input, &Output,&Setpoint, Kp, Ki, Kd, DIRECT);
 
 //Motore a
@@ -27,11 +27,12 @@ unsigned long oldtime = 0;
 
 
 void setup(){
+  mypid.SetMode(AUTOMATIC);
+  mypid.SetTunings(Kp, Ki, Kd);
+  
   pinMode(pwm, OUTPUT);
   pinMode(right, OUTPUT);
   pinMode(left, OUTPUT);
-  digitalWrite(left, HIGH);
-  digitalWrite(right, LOW);
     
   pinMode(encoderA, INPUT); 
   digitalWrite(encoderA, HIGH); 
@@ -60,8 +61,21 @@ void loop()
     Serial.print(",  ");
     Serial.println(EncoderCounterB,DEC);
 
-    Setpoint = 1050;//Voglio che il motore faccia 180°
+    
+    Setpoint = -1050;//Voglio che il motore faccia 90°
     Input = EncoderCounterA;
+    if(Setpoint >0)
+      {
+            //Senso Antiorario
+            digitalWrite(left,HIGH);
+            digitalWrite(right,LOW);
+            mypid.SetControllerDirection(DIRECT);
+      }else{
+          digitalWrite(left, LOW);
+          digitalWrite(right, HIGH);
+          mypid.SetControllerDirection(REVERSE);
+      }
+    
     mypid.Compute();
     analogWrite(pwm, Output);
     
