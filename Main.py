@@ -90,3 +90,9 @@ for angolo in angoli:
     angolo = angolo*180/math.pi
     i = i +1
     print("angolo", i, angolo)
+
+
+import serial
+ser = serial.Serial('COM3',9600)
+ser.write(261)
+ser.close()
