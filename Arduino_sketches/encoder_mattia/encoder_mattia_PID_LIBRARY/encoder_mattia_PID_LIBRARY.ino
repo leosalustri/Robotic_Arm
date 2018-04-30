@@ -5,7 +5,7 @@
 double Setpoint;
 double Input;
 double Output;
-double Kp = 8 , Ki =100 , Kd=0.01;
+double Kp = 4500 , Ki =200 , Kd=1000;
 PID mypid(&Input, &Output,&Setpoint, Kp, Ki, Kd, DIRECT);
 
 //Motore a
