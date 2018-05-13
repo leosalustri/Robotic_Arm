@@ -1,11 +1,12 @@
 #include <PID_v1.h>
+
 //Ottenere i pass encoder gestendo due motori per arduino.
 
 //PID params and variables
 double Setpoint;
 double Input;
 double Output;
-double Kp = 4500 , Ki =200 , Kd=1000;
+double Kp = 4500 , Ki =200, Kd=1000;
 PID mypid(&Input, &Output,&Setpoint, Kp, Ki, Kd, DIRECT);
 
 //Motore a
@@ -21,10 +22,12 @@ volatile long EncoderCounterA = 0;
 #define d_encoderB 8
 volatile long EncoderCounterB = 0; 
 
-//Time 
-#define sampling_time 50 //microseconds
-unsigned long oldtime = 0;
 
+
+int pos;
+bool isHome = false;
+void moveMotor(int passi);
+void goHome();
 
 void setup(){
   mypid.SetMode(AUTOMATIC);
@@ -47,41 +50,20 @@ void setup(){
   attachInterrupt(0, doEncoderA, CHANGE);
   attachInterrupt(1, doEncoderB, CHANGE);
   Serial.begin(9600);
-  oldtime = micros();
+  pos = -261;
 }
 
 void loop()
 {
-  //delta t = 50 millisec
-  if(micros()-oldtime > sampling_time){
-    oldtime = micros();  
     EncoderCounterA = constrain(EncoderCounterA,-1E6,1E6);
     EncoderCounterB = constrain(EncoderCounterB,-1E6,1E6);
     Serial.print(EncoderCounterA,DEC);
     Serial.print(",  ");
+    Serial.print(Output, DEC);
+    Serial.print(",  ");
     Serial.println(EncoderCounterB,DEC);
-
     
-    Setpoint = -1050;//Voglio che il motore faccia 90°
-    Input = EncoderCounterA;
-    if(Setpoint >0)
-      {
-            //Senso Antiorario
-            digitalWrite(left,HIGH);
-            digitalWrite(right,LOW);
-            mypid.SetControllerDirection(DIRECT);
-      }else{
-          digitalWrite(left, LOW);
-          digitalWrite(right, HIGH);
-          mypid.SetControllerDirection(REVERSE);
-      }
-    
-    mypid.Compute();
-    analogWrite(pwm, Output);
-    
-       
-  }  
-    
+    moveMotor(pos);
 }
 
 //Edited interrupt service routine
@@ -103,3 +85,23 @@ void doEncoderB(){
                 if(digitalRead(encoderB)) EncoderCounterB--;
                 }
    }
+
+void moveMotor(int passi){
+//Controlla la direzione :Negativo senso orario
+if(passi >0)
+      {
+            //Senso Antiorario
+            digitalWrite(left,LOW);
+            digitalWrite(right,HIGH);
+            mypid.SetControllerDirection(DIRECT);
+      }else{
+          digitalWrite(left, HIGH);
+          digitalWrite(right, LOW);
+          mypid.SetControllerDirection(REVERSE);
+      }
+  Input = EncoderCounterA;
+  Setpoint = passi;
+  mypid.Compute();
+  analogWrite(pwm, Output);
+}
+
