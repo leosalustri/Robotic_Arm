@@ -1,8 +1,18 @@
-import time
 import serial
-ser = serial.Serial('COM7',9600)
 
-time.sleep(3)
-ser.write(220)
-print('done')
-ser.close()
+ser = serial.Serial('COM3', 9600)
+connected = False
+def connect():
+    c = ser.read()
+    if(c=='C'):
+        connected = True
+        print('connected')
+    return connected
+
+def write(data):
+    if(connect()):
+        ser.write(data)
+        print('done')
+        ser.close()
+
+write(300)

@@ -9,8 +9,8 @@ cap = cv2.VideoCapture(0)
 lower_red = np.array([140,50,0])#da controllare i valori con le dovute proporzioni.
 upper_red = np.array([140,50,0])
 
-lower_blue = np.array([99,100,80])#da controllare i valori con le dovute proporzioni.
-upper_blue = np.array([119,255,200])
+lower_blue = np.array([104,120,45])#da controllare i valori con le dovute proporzioni.
+upper_blue = np.array([124,255,150])
 
 lower_green = np.array([140,50,0])#da controllare i valori con le dovute proporzioni.
 upper_green = np.array([140,50,0])
@@ -40,7 +40,7 @@ while cap and save:
     #Applico hough circle transform settare i parametri in base alle conversioni cm in pixel del sistema di riferimento.
     circlesRed = cv2.HoughCircles(greyRed, cv2.HOUGH_GRADIENT, 1, 50, param1=50, param2=30, minRadius=20, maxRadius=200)
     circlesGreen = cv2.HoughCircles(greyGreen, cv2.HOUGH_GRADIENT, 1, 50 ,param1 = 50, param2 = 30, minRadius = 20, maxRadius = 200)
-    circlesBlue = cv2.HoughCircles(greyBlue, cv2.HOUGH_GRADIENT, 1, 300, param1=50, param2=30, minRadius=10, maxRadius=400)
+    circlesBlue = cv2.HoughCircles(greyBlue, cv2.HOUGH_GRADIENT, 1, 50, param1=50, param2=30, minRadius=10, maxRadius=1000)
 
     #Gestisco il caso in cui non vi siano cerchi nel frame( assurdo )
     if circlesRed or circlesGreen or circlesBlue is None:
@@ -92,7 +92,5 @@ for angolo in angoli:
     print("angolo", i, angolo)
 
 
-import serial
-ser = serial.Serial('COM3',9600)
-ser.write(261)
-ser.close()
+#import Cinematic
+#Cinematic.write(220)

@@ -6,7 +6,7 @@
 double Setpoint;
 double Input;
 double Output;
-double Kp = 4500 , Ki = 200, Kd=1000;
+double Kp = 4500 , Ki =200, Kd=1000;
 PID mypid(&Input, &Output,&Setpoint, Kp, Ki, Kd, DIRECT);
 
 //Motore a
@@ -16,7 +16,6 @@ volatile long EncoderCounterA = 0;
 #define pwm 11
 #define left 12
 #define right 13
-int oldPassi ;
 
 //Motore b
 #define encoderB 3
@@ -49,30 +48,22 @@ void setup(){
   attachInterrupt(0, doEncoderA, CHANGE);
   attachInterrupt(1, doEncoderB, CHANGE);
   Serial.begin(9600);
-  //pos = 1050;
+  //pos = -261;
 }
 
 void loop()
 {
     EncoderCounterA = constrain(EncoderCounterA,-1E6,1E6);
     EncoderCounterB = constrain(EncoderCounterB,-1E6,1E6);
-    Serial.print(EncoderCounterA,DEC);
-    Serial.print(",  ");
+    //Serial.print(EncoderCounterA,DEC);
+    //Serial.print(",  ");
     //Serial.print(Output, DEC);
     //Serial.print(",  ");
     //Serial.println(pos, DEC);
     //Serial.print(",  ");
     //Serial.println(EncoderCounterB,DEC);
-    if(Serial.available()>0){
-      pos = Serial.parseInt();
-      
-    }
-    else {
-      pos = pos;
-    }
-
-    Serial.println(pos, DEC);
-    moveMotor(pos);  
+  
+   moveMotor(pos);
    
 }
 
@@ -98,9 +89,8 @@ void doEncoderB(){
    }
 
 void moveMotor(int passi){
-  
 //Controlla la direzione :Negativo senso orario
-if(passi >EncoderCounterA)
+if(passi >0)
       {
             //Senso Antiorario
             digitalWrite(left,LOW);
@@ -111,14 +101,19 @@ if(passi >EncoderCounterA)
           digitalWrite(right, LOW);
           mypid.SetControllerDirection(REVERSE);
       }
- if(EncoderCounterA>passi -10 and EncoderCounterA < passi + 10){
- analogWrite(pwm, 0); 
- }else {
   Input = EncoderCounterA;
   Setpoint = passi;
   mypid.Compute();
   analogWrite(pwm, Output);
- }
-  
+}
+
+void serialEvent(){
+    if(Serial.available()> 0){
+      pos = Serial.parseInt();
+      
+    }
+    digitalWrite(8, HIGH);
+      digitalWrite(4, LOW);
+
 }
 
