@@ -16,7 +16,7 @@ volatile long EncoderCounterA = 0;
 #define pwm 11
 #define left 12
 #define right 13
-int oldPassi ;
+
 
 //Motore b
 #define encoderB 3
@@ -111,9 +111,12 @@ if(passi >EncoderCounterA)
           digitalWrite(right, LOW);
           mypid.SetControllerDirection(REVERSE);
       }
- if(EncoderCounterA>passi -10 and EncoderCounterA < passi + 10){
- analogWrite(pwm, 0); 
- }else {
+    //fa fermare il motore se ha raggiunto tale valore di encoder ,evita inoltre il tremolio  
+  if(EncoderCounterA>passi -10 and EncoderCounterA < passi + 10)
+    {
+      analogWrite(pwm, 0); 
+    }
+  else {
   Input = EncoderCounterA;
   Setpoint = passi;
   mypid.Compute();
